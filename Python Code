@@ -1,0 +1,31 @@
+mport random
+import string
+
+def generate_password(length, include_uppercase, include_digits, include_special):
+    ciharacters = string.ascii_lowercase
+    if include_uppercase:
+        characters += string.ascii_uppercase
+    if include_digits:
+        characters += string.digits
+    if include_special:
+        characters += string.punctuation
+
+    if not characters:
+        return "Error: No character types selected."
+
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+try:
+    length = int(input("Enter desired password length: "))
+    if length <= 0:
+        print("Password length must be a positive number.")
+    else:
+        include_uppercase = input("Include uppercase letters? (y/n): ").lower() == 'y'
+        include_digits = input("Include digits? (y/n): ").lower() == 'y'
+        include_special = input("Include special characters? (y/n): ").lower() == 'y'
+
+        password = generate_password(length, include_uppercase, include_digits, include_special)
+        print(f"Generated password: {password}")
+except ValueError:
+    print("Invalid input for length. Please enter a number.")
